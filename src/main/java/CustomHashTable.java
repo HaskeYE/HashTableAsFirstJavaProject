@@ -45,10 +45,16 @@ public class CustomHashTable {
 
     public boolean delete(int num) {
         LinkedList<Integer> list = numerals.get(indexForHash(hash(num)));
-        for (int numeral : list)
-            if (numeral == num) {
-                list.remove(numeral);
-                return true;
+            if (list.contains(num)) {
+                if (list.size() > 1) {
+                    list.remove(num);
+                    numerals.remove(indexForHash(hash(num)));
+                    numerals.add(indexForHash(hash(num)), list);
+                    return true;
+                } else {
+                    numerals.remove(indexForHash(hash(num)));
+                    numerals.add(indexForHash(hash(num)), new LinkedList<Integer>());
+                }
             }
         return false;
     }
