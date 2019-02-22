@@ -1,17 +1,22 @@
 import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class CustomHashTable {
 
-    ArrayList<LinkedList<Integer>> numerals;
+        // Check HashSet
+    ArrayList<LinkedList<Integer>> numerals;// Проверить типы данных LinkedList -? область видимости
     private int hashDiv; //хеш-функция деления
 
     public CustomHashTable(@NotNull ArrayList<Integer> list, @NotNull int hashDiv) {
-        numerals = new ArrayList<>(hashDiv - 1);
+        numerals = new ArrayList<>(hashDiv);
         this.hashDiv = hashDiv;
-        for (Integer i : list) {
+        for (int i = 0; i < hashDiv; i++) {
+            numerals.add(i, new LinkedList<Integer>());
+        }
+        for (Integer i: list) {
             add(i);
         }
     }
@@ -21,20 +26,21 @@ public class CustomHashTable {
     }
 
     private int indexForHash(int hash) {
-//Ддя возможно необходимых дальнейших операций
+    //Ддя возможно необходимых дальнейших операций
         return hash;
     }
 
     public void add(int num) {
-        int index = indexForHash(hash(num));
-        if (numerals.get(index) != null) {
-            numerals.get(index).add(num);
-        } else {
-            LinkedList listNew = new LinkedList<>();
-            listNew.add(num);
-            numerals.add(index, listNew);
+        if (!numerals.contains(num)) {
+            int index = indexForHash(hash(num));
+            if (numerals.get(index) != null) {
+                numerals.get(index).add(num);
+            } else {
+                LinkedList listNew = new LinkedList<>();
+                listNew.add(num);
+                numerals.add(index, listNew);
+            }
         }
-
     }
 
     public boolean delete(int num) {
@@ -48,7 +54,7 @@ public class CustomHashTable {
     }
 
     public boolean contains(int num) {
-        return (numerals.get(indexForHash(hash(num))).contains(num));
+        return (numerals.get(indexForHash(hash(num))).contains(num));  //HOW TO OPTIMIZE SPEED?
     }
 
     @Override
@@ -57,4 +63,6 @@ public class CustomHashTable {
                 ((CustomHashTable) obj).numerals.equals(numerals) &&
                 ((CustomHashTable) obj).hashDiv == hashDiv);
     }
+
+    //REHASH
 }
