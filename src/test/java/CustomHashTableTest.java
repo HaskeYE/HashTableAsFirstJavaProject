@@ -17,7 +17,7 @@ public class CustomHashTableTest {
         CustomHashTable table = new CustomHashTable(list, 5);
         ArrayList listNew = new ArrayList();
         for (int i = 0; i < 4 ; i++) {
-            list.add(i);
+            listNew.add(i);
         }
         CustomHashTable tableNew = new CustomHashTable(listNew, 5);
         tableNew.add(4);
