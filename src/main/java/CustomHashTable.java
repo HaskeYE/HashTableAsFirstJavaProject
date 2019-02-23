@@ -1,21 +1,18 @@
 import com.sun.istack.internal.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
 
 public class CustomHashTable {
 
         // Check HashSet
-    HashMap<Integer, LinkedList<Integer>> numerals;// Проверить типы данных LinkedList -? область видимости
+    HashMap<Integer, Set<Integer>> numerals;// Проверить типы данных LinkedList -? область видимости
     private int hashDiv; //хеш-функция деления
 
     public CustomHashTable(@NotNull ArrayList<Integer> list, @NotNull int hashDiv) {
         numerals = new HashMap<>(hashDiv);
         this.hashDiv = hashDiv;
         for (int i = 0; i < hashDiv; i++) {
-            numerals.put(i, new LinkedList<Integer>());
+            numerals.put(i, new HashSet<>());
         }
         for (Integer i: list) {
             add(i);
@@ -37,7 +34,7 @@ public class CustomHashTable {
             if (numerals.get(index) != null) {
                 numerals.get(index).add(num);
             } else {
-                LinkedList listNew = new LinkedList<>();
+                Set listNew = new HashSet();
                 listNew.add(num);
                 numerals.put(index, listNew);
             }
@@ -45,14 +42,14 @@ public class CustomHashTable {
     }
 
     public boolean delete(int num) {
-        LinkedList<Integer> list = numerals.get(indexForHash(hash(num)));
+        Set<Integer> list = numerals.get(indexForHash(hash(num)));
             if (list.contains(num)) {
                 if (list.size() > 1) {
                     list.remove(num);
                     numerals.replace(indexForHash(hash(num)), list);
                     return true;
                 } else {
-                    numerals.replace(indexForHash(hash(num)), new LinkedList<Integer>());
+                    numerals.replace(indexForHash(hash(num)), new HashSet<>());
                 }
             }
         return false;
