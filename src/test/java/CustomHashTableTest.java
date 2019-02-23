@@ -25,7 +25,7 @@ assertEquals(table, tableNew);
     }
 
     @Test
-    public void hashTable1() {
+    public void hashTableAdd1() {
         ArrayList list = new ArrayList();
         for (int i = 0; i < 5 ; i++) {
             list.add(i);
@@ -42,7 +42,7 @@ assertEquals(table, tableNew);
 
 
     @Test
-    public void hashTable2() {
+    public void hashTableEqualsAdd() {
         ArrayList list = new ArrayList();
         for (int i = 0; i < 5 ; i++) {
             list.add(i);
@@ -58,7 +58,7 @@ assertEquals(table, tableNew);
 
 
     @Test
-    public void hashTable3() {
+    public void hashTableContains() {
         ArrayList list = new ArrayList();
         for (int i = 0; i < 5 ; i++) {
             list.add(i);
@@ -70,7 +70,7 @@ assertEquals(table, tableNew);
 
 
     @Test
-    public void hashTable4() {
+    public void hashTableContains1() {
         ArrayList list = new ArrayList();
         for (int i = 0; i < 5 ; i++) {
             list.add(i);
@@ -82,7 +82,7 @@ assertEquals(table, tableNew);
 
 
     @Test
-    public void hashTable5() {
+    public void hashTableEquals() {
         ArrayList list = new ArrayList();
         for (int i = 0; i < 5 ; i++) {
             list.add(i);
@@ -99,7 +99,7 @@ assertEquals(table, tableNew);
 
 
     @Test
-    public void hashTable6() {
+    public void hashTableEquals1() {
         ArrayList list = new ArrayList();
         for (int i = 0; i < 5 ; i++) {
             list.add(i);
