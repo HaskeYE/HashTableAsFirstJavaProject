@@ -5,10 +5,10 @@ import java.util.*;
 public class CustomHashTable {
 
         // Check HashSet
-    HashMap<Integer, Set<Integer>> numerals;// Проверить типы данных LinkedList -? область видимости
+    private HashMap<Integer, Set<Integer>> numerals;
     private int hashDiv; //хеш-функция деления
 
-    public CustomHashTable(@NotNull ArrayList<Integer> list, @NotNull int hashDiv) {
+    CustomHashTable(@NotNull ArrayList<Integer> list, @NotNull int hashDiv) {
         numerals = new HashMap<>(hashDiv);
         this.hashDiv = hashDiv;
         for (int i = 0; i < hashDiv; i++) {
@@ -28,7 +28,7 @@ public class CustomHashTable {
         return hash;
     }
 
-    public void add(int num) {
+    void add(int num) {
         if (!numerals.containsValue(num)) {
             int index = indexForHash(hash(num));
             if (numerals.get(index) != null) {
@@ -41,7 +41,7 @@ public class CustomHashTable {
         }
     }
 
-    public boolean delete(int num) {
+    boolean delete(int num) {
         Set<Integer> list = numerals.get(indexForHash(hash(num)));
             if (list.contains(num)) {
                 if (list.size() > 1) {
@@ -55,7 +55,7 @@ public class CustomHashTable {
         return false;
     }
 
-    public boolean contains(int num) {
+    boolean contains(int num) {
         return (numerals.get(indexForHash(hash(num))).contains(num));  //HOW TO OPTIMIZE SPEED?
     }
 
