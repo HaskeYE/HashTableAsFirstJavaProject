@@ -67,4 +67,12 @@ public class CustomHashTable {
     }
 
     //REHASH
+    /*double loadFactor = (1.0 * size) / numBuckets;
+     if (loadFactor > DEFAULT_LOAD_FACTOR) {
+    rehash();}
+     private void rehash()
+    {//Увеличение всех типов данных по вместимости
+    Rehash keys and increase size of table
+    ...Maybe need only to increase max length of Sets....
+    }*/
 }
