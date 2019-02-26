@@ -1,62 +1,64 @@
+
+
 import com.sun.istack.internal.NotNull;
 
 import java.util.*;
 
 public class CustomHashTable {
 
-        // Check HashSet
+    // Check HashSet
     private HashMap<Integer, Set<Integer>> numerals;
     private int hashDiv; //хеш-функция деления
 
-    CustomHashTable(@NotNull ArrayList<Integer> list, @NotNull int hashDiv) {
+    public CustomHashTable(@NotNull List<Integer> list, int hashDiv) {//NotNull check
+        //Adding empty buckets
         numerals = new HashMap<>(hashDiv);
         this.hashDiv = hashDiv;
         for (int i = 0; i < hashDiv; i++) {
             numerals.put(i, new HashSet<>());
         }
-        for (Integer i: list) {
+        //Adding list of numerals which must be held by HashTable
+        for (Integer i : list) {
             add(i);
         }
     }
 
+    //Getting bucket number
     private int hash(int numeral) {
         return numeral % hashDiv;
     }
 
     private int indexForHash(int hash) {
-    //Ддя возможно необходимых дальнейших операций
+        //Ддя возможно необходимых дальнейших операций
         return hash;
     }
-
-    void add(int num) {
-        if (!numerals.containsValue(num)) {
+//Adding new numeral to HashTable
+    boolean add(int num) {
+        //Trying to realize if this numeral already in HashTable
+        if (!numerals.get(indexForHash(hash(num))).contains(num)) {
             int index = indexForHash(hash(num));
-            if (numerals.get(index) != null) {
-                numerals.get(index).add(num);
-            } else {
-                Set listNew = new HashSet();
-                listNew.add(num);
-                numerals.put(index, listNew);
-            }
-        }
+            numerals.get(index).add(num);
+            return true;
+        } else return false;
     }
-
+//Deleting numeral from HashTable
     boolean delete(int num) {
         Set<Integer> list = numerals.get(indexForHash(hash(num)));
-            if (list.contains(num)) {
-                if (list.size() > 1) {
-                    list.remove(num);
-                    numerals.replace(indexForHash(hash(num)), list);
-                    return true;
-                } else {
-                    numerals.replace(indexForHash(hash(num)), new HashSet<>());
-                }
+        if (list.contains(num)) {
+            if (list.size() > 1) {
+                list.remove(num);
+                return true;
+            } else {
+                //Replacing set with one numeral by empty one
+                numerals.replace(indexForHash(hash(num)), new HashSet<>());
+                return true;
             }
+        }
         return false;
     }
 
     boolean contains(int num) {
-        return (numerals.get(indexForHash(hash(num))).contains(num));  //HOW TO OPTIMIZE SPEED?
+        return (numerals.get(indexForHash(hash(num))).contains(num));
     }
 
     @Override
