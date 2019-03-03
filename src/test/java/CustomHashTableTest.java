@@ -113,4 +113,13 @@ assertEquals(table, tableNew);
         Boolean bool = table.equals(tableNew);
         assertEquals(bool, false);
     }
+
+    @Test
+    public void HashTableRehash() {
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < 15; i++) {
+            list.add(i);
+        }
+        CustomHashTable table = new CustomHashTable(list, 5);
+    }
 }
