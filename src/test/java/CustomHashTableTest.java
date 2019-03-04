@@ -1,3 +1,5 @@
+import com.HashTable.HaskeYE.CustomHashTable;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class CustomHashTableTest {
         }
         CustomHashTable tableNew = new CustomHashTable(listNew, 5);
         tableNew.add(4);
-assertEquals(table, tableNew);
+Assertions.assertEquals(table, tableNew);
     }
 
     @Test

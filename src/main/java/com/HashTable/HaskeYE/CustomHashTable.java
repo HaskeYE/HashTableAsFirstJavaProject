@@ -1,4 +1,4 @@
-
+package com.HashTable.HaskeYE;
 
 import com.sun.istack.internal.NotNull;
 
@@ -81,7 +81,7 @@ public class CustomHashTable {
                 ((CustomHashTable) obj).hashDiv == hashDiv);
     }
 
-    // map
+
     void rehash() {
         Map<Integer, Set<Integer>> table = new HashMap<>(hashDiv * 2);
         capacity = capacity * 2;
