@@ -5,7 +5,8 @@ import com.sun.istack.internal.NotNull;
 import java.util.*;
 
 import static java.lang.Math.abs;
-// пакеты
+
+
 public class CustomHashTable {
 
 
