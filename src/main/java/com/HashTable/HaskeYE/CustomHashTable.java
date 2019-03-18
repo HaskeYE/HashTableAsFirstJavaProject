@@ -7,6 +7,7 @@ import java.util.*;
 import static java.lang.Math.abs;
 
 
+// Javadoc
 public class CustomHashTable {
 
 
@@ -40,7 +41,6 @@ public class CustomHashTable {
 
 
     //Adding new numeral to HashTable
-    // область видимости
     public boolean add(int num) {
         //Trying to realize if this numeral already in HashTable
         if (!contains(num)) {
@@ -58,14 +58,9 @@ public class CustomHashTable {
      public boolean delete(int num) {
         Set<Integer> list = numerals.get(hash(num));
         if (list.contains(num)) {
-            if (list.size() > 1) {
-                list.remove(num);
-                return true;               // duplication
-            } else {
-                //Replacing set with one numeral by empty one
-                numerals.replace(hash(num), new HashSet<>()); //use-case
-                return true;
-            }
+            list.remove(num);
+            return true;
+            // collection magic
         }
         return false;
     }
@@ -83,15 +78,16 @@ public class CustomHashTable {
     }
 
 
-    void rehash() {
+
+    private void rehash() {
         Map<Integer, Set<Integer>> table = new HashMap<>(hashDiv * 2);
         capacity = capacity * 2;
-        for (int i = 0; i < hashDiv; i++) {
+        for (int i = 0; i < hashDiv * 2; i++) {
             table.put(i, new HashSet<>());
         }
         for (int i = 0; i < hashDiv; i++) {
             for (Integer j : numerals.get(i)) {
-                table.get(hash(j)).add(j);
+                table.get(abs(j) % (hashDiv * 2)).add(j);
             }
         }
         hashDiv = hashDiv * 2;
