@@ -7,7 +7,11 @@ import java.util.*;
 import static java.lang.Math.abs;
 
 
-// Javadoc
+/**
+ * HashTable is based on hash-function of dividing. It provides faster access to data.
+ * It contains <tt>Integer</tt> type numerals.
+ * Its performance is provided by number of buckets dependent on number of numerals included.
+ */
 public class CustomHashTable {
 
 
@@ -17,8 +21,20 @@ public class CustomHashTable {
     private int loadFactor;
     private int capacity;
 
-
-    public CustomHashTable(@NotNull List<Integer> list, int hashDiv) {//NotNull check
+    /**
+     * Now we are going to construct the table itself. So here is <tt>Constructor</tt>.
+     * It gets two parameters:
+     * @param list - list of numerals that can be included in table
+     * @param hashDiv - number, that will be divider of hash-function
+     *                We will construct (hashDiv) empty buckets:
+     *                0 ->
+     *                1 ->
+     *                2 ->
+     *                3 ->
+     *                ...
+     *           And then add numerals in it.
+     */
+    public CustomHashTable(@NotNull List<Integer> list, int hashDiv) {
         //Adding empty buckets
         loadFactor = 0;
         capacity = 16;
@@ -34,12 +50,11 @@ public class CustomHashTable {
         }
     }
 
-    //Getting bucket number
-    private int hash(int numeral) {
-        return abs(numeral) % hashDiv;
-    }
-
-
+    /**
+     * Adding operation adds numeral in bucket that matches the remainder of
+     * dividing the numeral by numeral from hash-function.
+     * If there will be too much numerals our table will be rehashed
+     */
     //Adding new numeral to HashTable
     public boolean add(int num) {
         //Trying to realize if this numeral already in HashTable
@@ -54,6 +69,18 @@ public class CustomHashTable {
         } else return false;
     }
 
+
+    //Getting bucket number
+    private int hash(int numeral) {
+        return abs(numeral) % hashDiv;
+    }
+
+    /**
+     * Also we will need deleting operation that should delete the number from table.
+     * This function will firstly search correct bucket by hashing incoming numeral and then
+     * will delete it from that bucket. But that all will be done only if there will be such numeral
+     * in our table.
+     */
     //Deleting numeral from HashTable
      public boolean delete(int num) {
         Set<Integer> list = numerals.get(hash(num));
@@ -70,6 +97,10 @@ public class CustomHashTable {
         return (numerals.get(hash(num)).contains(num));
     }
 
+    /**
+     * Besides our table can be tested for equality to other one by comparing their hash-functions
+     * and their content.
+     */
     @Override
     public boolean equals(Object obj) {
         return ((obj instanceof CustomHashTable) &&
@@ -77,8 +108,10 @@ public class CustomHashTable {
                 ((CustomHashTable) obj).hashDiv == hashDiv);
     }
 
-
-
+    /**
+     * And about rehashing - this operation increases capacity by two times by increasing
+     * <tt>hashDiv</tt> by two times and reconstructing table with it.
+     */
     private void rehash() {
         Map<Integer, Set<Integer>> table = new HashMap<>(hashDiv * 2);
         capacity = capacity * 2;
