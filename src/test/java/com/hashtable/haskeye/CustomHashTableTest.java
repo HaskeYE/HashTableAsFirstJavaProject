@@ -1,8 +1,10 @@
-import com.HashTable.HaskeYE.CustomHashTable;
+package com.hashtable.haskeye;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
+import java.util.List;
 
 // package
 public class CustomHashTableTest {
@@ -18,7 +20,7 @@ public class CustomHashTableTest {
             list.add(i);
         }
         CustomHashTable table = new CustomHashTable(list, 5);
-        ArrayList listNew = new ArrayList();
+        List listNew = new ArrayList();
         for (int i = 0; i < 4 ; i++) {
             listNew.add(i);
         }
@@ -29,20 +31,31 @@ Assertions.assertEquals(table, tableNew);
 
     @Test
     public void hashTableAdd1() {
-        ArrayList list = new ArrayList();
-        for (int i = 0; i < 5 ; i++) {
+        List list = new ArrayList();
+        for (int i = 0; i < 6; i++) {
             list.add(i);
         }
         CustomHashTable table = new CustomHashTable(list, 5);
-        ArrayList listNew = new ArrayList();
-        for (int i = 0; i < 4 ; i++) {
+        table.delete(8);
+        assertEquals(false, table.delete(8));
+    }
+
+
+    @Test
+    public void hashTableDelete() {
+        List list = new ArrayList();
+        for (int i = 0; i < 25 ; i++) {
+            list.add(i);
+        }
+        CustomHashTable table = new CustomHashTable(list, 5);
+        List listNew = new ArrayList();
+        for (int i = 0; i < 24 ; i++) {
             listNew.add(i);
         }
         CustomHashTable tableNew = new CustomHashTable(listNew, 5);
-        table.delete(4);
+        table.delete(24);
         assertEquals(table, tableNew);
     }
-
 
     @Test
     public void hashTableEqualsAdd() {

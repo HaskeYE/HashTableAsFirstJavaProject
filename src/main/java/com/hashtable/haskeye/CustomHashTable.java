@@ -1,4 +1,4 @@
-package com.HashTable.HaskeYE;
+package com.hashtable.haskeye;
 
 import com.sun.istack.internal.NotNull;
 
@@ -33,6 +33,7 @@ public class CustomHashTable {
      *                3 ->
      *                ...
      *           And then add numerals in it.
+     * Capacity will be set as default value = 16
      */
     public CustomHashTable(@NotNull List<Integer> list, int hashDiv) {
         //Adding empty buckets
@@ -44,7 +45,6 @@ public class CustomHashTable {
             numerals.put(i, new HashSet<>());
         }
         //Adding list of numerals which must be held by HashTable
-        if (!list.equals(Collections.emptyList()))
             for (Integer i : list) {
             add(i);
         }
